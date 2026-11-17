@@ -1,0 +1,2077 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Renfe",
+  "description": {
+    "en": "Spanish trains (Renfe): AVE, long distance, Cercanías; delays, cancellations, tracks.",
+    "fr": "Trains espagnols (Renfe) : AVE, grandes lignes, Cercanías ; retards, suppressions, voies.",
+    "de": "Spanische Züge (Renfe): AVE, Fernverkehr, Cercanías; Verspätungen, Ausfälle, Gleise.",
+    "es": "Trenes de Renfe: AVE, larga distancia, Cercanías; retrasos, supresiones, vías."
+  },
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/william-de71/gladys-renfe:0.1.0",
+  "gladys_version": ">=5.3.0",
+  "categories": ["transport"],
+  "keywords": [
+    "renfe",
+    "spain",
+    "españa",
+    "espagne",
+    "ave",
+    "avlo",
+    "alvia",
+    "cercanias",
+    "rodalies",
+    "train"
+  ],
+  "countries": ["ES"],
+  "cover_image": "https://raw.githubusercontent.com/William-De71/gladys-renfe/main/cover.jpg",
+  "transports": ["cloud"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Renfe open data",
+        "fr": "Open data Renfe",
+        "de": "Renfe Open Data",
+        "es": "Datos abiertos de Renfe"
+      },
+      "description": {
+        "en": "The trains come from the official open data of Renfe: the timetables (GTFS) of the long and medium distance (AVE, Avlo, Alvia, Intercity, Regional…) and of the Cercanías and Rodalies of every núcleo, and their real time (GTFS-RT: delays, cancellations, tracks, alerts). No account and no key: fill in your stations and lines below, then press \"Test the connection\".",
+        "fr": "Les trains viennent de l’open data officiel de Renfe : les horaires (GTFS) des grandes lignes (AVE, Avlo, Alvia, Intercity, Regional…) et des Cercanías et Rodalies de chaque núcleo, et leur temps réel (GTFS-RT : retards, suppressions, voies, alertes). Ni compte ni clé : renseignez vos gares et lignes ci-dessous, puis appuyez sur « Tester la connexion ».",
+        "de": "Die Züge stammen aus den offiziellen Open Data von Renfe: den Fahrplänen (GTFS) des Fern- und Regionalverkehrs (AVE, Avlo, Alvia, Intercity, Regional…) und der Cercanías und Rodalies jedes Núcleo sowie ihrer Echtzeit (GTFS-RT: Verspätungen, Ausfälle, Gleise, Meldungen). Kein Konto, kein Schlüssel: Trage unten deine Bahnhöfe und Linien ein und drücke dann „Verbindung testen“.",
+        "es": "Los trenes proceden de los datos abiertos oficiales de Renfe: los horarios (GTFS) de larga y media distancia (AVE, Avlo, Alvia, Intercity, Regional…) y de las Cercanías y Rodalies de cada núcleo, y su tiempo real (GTFS-RT: retrasos, supresiones, vías, avisos). Sin cuenta ni clave: rellena tus estaciones y líneas abajo y pulsa «Probar la conexión»."
+      },
+      "links": [
+        {
+          "url": "https://data.renfe.com/",
+          "label": {
+            "en": "Renfe open data (data.renfe.com)",
+            "fr": "Open data Renfe (data.renfe.com)",
+            "de": "Renfe Open Data (data.renfe.com)",
+            "es": "Datos abiertos de Renfe (data.renfe.com)"
+          }
+        },
+        {
+          "url": "https://www.renfe.com/",
+          "label": {
+            "en": "renfe.com",
+            "fr": "renfe.com",
+            "de": "renfe.com",
+            "es": "renfe.com"
+          }
+        }
+      ]
+    },
+    {
+      "key": "station_1_section",
+      "type": "section",
+      "label": {
+        "en": "Station 1",
+        "fr": "Gare 1",
+        "de": "Bahnhof 1",
+        "es": "Estación 1"
+      },
+      "description": {
+        "en": "The station where you take the train: its next departures, from the timetable corrected in real time, with their delay, their track (Cercanías) and their arrival at your destination.",
+        "fr": "La gare où vous prenez le train : ses prochains départs, issus des horaires corrigés en temps réel, avec leur retard, leur voie (Cercanías) et leur arrivée à votre destination.",
+        "de": "Der Bahnhof, an dem du einsteigst: seine nächsten Abfahrten aus dem in Echtzeit korrigierten Fahrplan, mit Verspätung, Gleis (Cercanías) und Ankunft an deinem Ziel.",
+        "es": "La estación donde tomas el tren: sus próximas salidas, del horario corregido en tiempo real, con su retraso, su vía (Cercanías) y su llegada a tu destino."
+      }
+    },
+    {
+      "key": "station_1",
+      "type": "string",
+      "label": {
+        "en": "Station",
+        "fr": "Gare",
+        "de": "Bahnhof",
+        "es": "Estación"
+      },
+      "description": {
+        "en": "Its name as Renfe writes it (\"Madrid-Chamartín-Clara Campoamor\", \"Aranjuez\"), a part of it when only one station holds it (\"Chamartín\"), or its code: the \"Find a station\" button gives them.",
+        "fr": "Son nom tel que Renfe l’écrit (« Madrid-Chamartín-Clara Campoamor », « Aranjuez »), une partie quand une seule gare la contient (« Chamartín »), ou son code : le bouton « Chercher une gare » les donne.",
+        "de": "Ihr Name, wie Renfe ihn schreibt („Madrid-Chamartín-Clara Campoamor“, „Aranjuez“), ein Teil davon, wenn nur ein Bahnhof ihn enthält („Chamartín“), oder sein Code: die Schaltfläche „Bahnhof suchen“ nennt sie.",
+        "es": "Su nombre tal como lo escribe Renfe («Madrid-Chamartín-Clara Campoamor», «Aranjuez»), una parte si solo una estación la contiene («Chamartín»), o su código: el botón «Buscar una estación» los da."
+      },
+      "placeholder": {
+        "en": "Madrid-Atocha Cercanías",
+        "fr": "Madrid-Atocha Cercanías",
+        "de": "Madrid-Atocha Cercanías",
+        "es": "Madrid-Atocha Cercanías"
+      },
+      "required": false
+    },
+    {
+      "key": "station_1_destination",
+      "type": "string",
+      "label": {
+        "en": "Destination",
+        "fr": "Destination",
+        "de": "Ziel",
+        "es": "Destino"
+      },
+      "description": {
+        "en": "Only the trains calling at this station afterwards, with their arrival time there. Empty for every train leaving the station.",
+        "fr": "Seulement les trains qui desservent ensuite cette gare, avec leur heure d’arrivée. Vide pour tous les trains au départ de la gare.",
+        "de": "Nur die Züge, die danach an diesem Bahnhof halten, mit ihrer Ankunftszeit dort. Leer für alle Züge ab dem Bahnhof.",
+        "es": "Solo los trenes que paran después en esta estación, con su hora de llegada. Vacío para todos los trenes que salen de la estación."
+      },
+      "placeholder": {
+        "en": "Aranjuez",
+        "fr": "Aranjuez",
+        "de": "Aranjuez",
+        "es": "Aranjuez"
+      },
+      "required": false
+    },
+    {
+      "key": "station_1_line",
+      "type": "string",
+      "label": {
+        "en": "Line",
+        "fr": "Ligne",
+        "de": "Linie",
+        "es": "Línea"
+      },
+      "description": {
+        "en": "Only this line: a Cercanías line (\"C3\", \"R2N\") or a product of long distance (\"AVE\", \"Avlo\", \"Regional\"). Empty for every line.",
+        "fr": "Seulement cette ligne : une ligne de Cercanías (« C3 », « R2N ») ou un produit grandes lignes (« AVE », « Avlo », « Regional »). Vide pour toutes les lignes.",
+        "de": "Nur diese Linie: eine Cercanías-Linie („C3“, „R2N“) oder ein Fernverkehrsprodukt („AVE“, „Avlo“, „Regional“). Leer für alle Linien.",
+        "es": "Solo esta línea: una línea de Cercanías («C3», «R2N») o un producto de larga distancia («AVE», «Avlo», «Regional»). Vacío para todas las líneas."
+      },
+      "placeholder": {
+        "en": "C3",
+        "fr": "C3",
+        "de": "C3",
+        "es": "C3"
+      },
+      "required": false
+    },
+    {
+      "key": "station_2_section",
+      "type": "section",
+      "label": {
+        "en": "Station 2",
+        "fr": "Gare 2",
+        "de": "Bahnhof 2",
+        "es": "Estación 2"
+      }
+    },
+    {
+      "key": "station_2",
+      "type": "string",
+      "label": {
+        "en": "Station",
+        "fr": "Gare",
+        "de": "Bahnhof",
+        "es": "Estación"
+      },
+      "placeholder": {
+        "en": "Aranjuez",
+        "fr": "Aranjuez",
+        "de": "Aranjuez",
+        "es": "Aranjuez"
+      },
+      "required": false
+    },
+    {
+      "key": "station_2_destination",
+      "type": "string",
+      "label": {
+        "en": "Destination",
+        "fr": "Destination",
+        "de": "Ziel",
+        "es": "Destino"
+      },
+      "description": {
+        "en": "Only the trains calling at this station afterwards, with their arrival time there. Empty for every train leaving the station.",
+        "fr": "Seulement les trains qui desservent ensuite cette gare, avec leur heure d’arrivée. Vide pour tous les trains au départ de la gare.",
+        "de": "Nur die Züge, die danach an diesem Bahnhof halten, mit ihrer Ankunftszeit dort. Leer für alle Züge ab dem Bahnhof.",
+        "es": "Solo los trenes que paran después en esta estación, con su hora de llegada. Vacío para todos los trenes que salen de la estación."
+      },
+      "placeholder": {
+        "en": "Madrid-Atocha Cercanías",
+        "fr": "Madrid-Atocha Cercanías",
+        "de": "Madrid-Atocha Cercanías",
+        "es": "Madrid-Atocha Cercanías"
+      },
+      "required": false
+    },
+    {
+      "key": "station_2_line",
+      "type": "string",
+      "label": {
+        "en": "Line",
+        "fr": "Ligne",
+        "de": "Linie",
+        "es": "Línea"
+      },
+      "description": {
+        "en": "Empty for every line.",
+        "fr": "Vide pour toutes les lignes.",
+        "de": "Leer für alle Linien.",
+        "es": "Vacío para todas las líneas."
+      },
+      "placeholder": {
+        "en": "C3",
+        "fr": "C3",
+        "de": "C3",
+        "es": "C3"
+      },
+      "required": false
+    },
+    {
+      "key": "station_3_section",
+      "type": "section",
+      "label": {
+        "en": "Station 3",
+        "fr": "Gare 3",
+        "de": "Bahnhof 3",
+        "es": "Estación 3"
+      },
+      "description": {
+        "en": "More stations (home, work, a weekly trip…): the \"Add a station\" button, under the form, follows up to 10 more, \"List the stations\" shows them all, numbered, and \"Remove a station\" stops following one.",
+        "fr": "D’autres gares (domicile, travail, un trajet de la semaine…) : le bouton « Ajouter une gare », sous le formulaire, en suit jusqu’à 10 de plus, « Lister les gares » les montre toutes, numérotées, et « Retirer une gare » arrête d’en suivre une.",
+        "de": "Weitere Bahnhöfe (Zuhause, Arbeit, eine wöchentliche Fahrt…): Die Schaltfläche „Bahnhof hinzufügen“ unter dem Formular verfolgt bis zu 10 weitere, „Bahnhöfe auflisten“ zeigt alle nummeriert, und „Bahnhof entfernen“ beendet die Verfolgung eines Bahnhofs.",
+        "es": "Más estaciones (casa, trabajo, un trayecto semanal…): el botón «Añadir una estación», bajo el formulario, sigue hasta 10 más, «Listar las estaciones» las muestra todas, numeradas, y «Quitar una estación» deja de seguir una."
+      }
+    },
+    {
+      "key": "station_3",
+      "type": "string",
+      "label": {
+        "en": "Station",
+        "fr": "Gare",
+        "de": "Bahnhof",
+        "es": "Estación"
+      },
+      "placeholder": {
+        "en": "Madrid-Puerta de Atocha-Almudena Grandes",
+        "fr": "Madrid-Puerta de Atocha-Almudena Grandes",
+        "de": "Madrid-Puerta de Atocha-Almudena Grandes",
+        "es": "Madrid-Puerta de Atocha-Almudena Grandes"
+      },
+      "required": false
+    },
+    {
+      "key": "station_3_destination",
+      "type": "string",
+      "label": {
+        "en": "Destination",
+        "fr": "Destination",
+        "de": "Ziel",
+        "es": "Destino"
+      },
+      "description": {
+        "en": "Only the trains calling at this station afterwards, with their arrival time there. Empty for every train leaving the station.",
+        "fr": "Seulement les trains qui desservent ensuite cette gare, avec leur heure d’arrivée. Vide pour tous les trains au départ de la gare.",
+        "de": "Nur die Züge, die danach an diesem Bahnhof halten, mit ihrer Ankunftszeit dort. Leer für alle Züge ab dem Bahnhof.",
+        "es": "Solo los trenes que paran después en esta estación, con su hora de llegada. Vacío para todos los trenes que salen de la estación."
+      },
+      "placeholder": {
+        "en": "Barcelona-Sants",
+        "fr": "Barcelona-Sants",
+        "de": "Barcelona-Sants",
+        "es": "Barcelona-Sants"
+      },
+      "required": false
+    },
+    {
+      "key": "station_3_line",
+      "type": "string",
+      "label": {
+        "en": "Line",
+        "fr": "Ligne",
+        "de": "Linie",
+        "es": "Línea"
+      },
+      "description": {
+        "en": "Empty for every line.",
+        "fr": "Vide pour toutes les lignes.",
+        "de": "Leer für alle Linien.",
+        "es": "Vacío para todas las líneas."
+      },
+      "placeholder": {
+        "en": "AVE",
+        "fr": "AVE",
+        "de": "AVE",
+        "es": "AVE"
+      },
+      "required": false
+    },
+    {
+      "key": "lines_section",
+      "type": "section",
+      "label": {
+        "en": "Traffic of the Cercanías lines",
+        "fr": "Trafic des lignes de Cercanías",
+        "de": "Verkehrslage der Cercanías-Linien",
+        "es": "Estado de las líneas de Cercanías"
+      },
+      "description": {
+        "en": "The Cercanías and Rodalies lines whose traffic you follow: a device per line, with its state (normal, traffic information, disrupted, heavily disrupted) worked out from the alerts of Renfe, and its messages (works, strikes, road replacement services), read every 5 minutes. The long distance trains have no alerts: their delays and cancellations are on the stations.",
+        "fr": "Les lignes de Cercanías et Rodalies dont vous suivez le trafic : un appareil par ligne, avec son état (normal, info trafic, perturbé, très perturbé) déduit des alertes de Renfe, et ses messages (travaux, grèves, bus de remplacement), lus toutes les 5 minutes. Les grandes lignes n’ont pas d’alertes : leurs retards et suppressions sont sur les gares.",
+        "de": "Die Cercanías- und Rodalies-Linien, deren Verkehrslage du verfolgst: ein Gerät pro Linie mit ihrem Zustand (normal, Verkehrsinformation, gestört, stark gestört) aus den Meldungen von Renfe und ihren Meldungen (Bauarbeiten, Streiks, Ersatzbusse), alle 5 Minuten gelesen. Der Fernverkehr hat keine Meldungen: seine Verspätungen und Ausfälle stehen an den Bahnhöfen.",
+        "es": "Las líneas de Cercanías y Rodalies cuyo estado sigues: un dispositivo por línea, con su estado (normal, aviso, alterado, muy alterado) deducido de los avisos de Renfe, y sus mensajes (obras, huelgas, servicio por carretera), leídos cada 5 minutos. La larga distancia no tiene avisos: sus retrasos y supresiones están en las estaciones."
+      }
+    },
+    {
+      "key": "lines",
+      "type": "string",
+      "label": {
+        "en": "Followed lines",
+        "fr": "Lignes suivies",
+        "de": "Verfolgte Linien",
+        "es": "Líneas seguidas"
+      },
+      "description": {
+        "en": "Up to 6, separated by commas, with their núcleo (\"C3 Madrid\", \"C1 Sevilla\", \"R2N\"), or without when your stations tell it.",
+        "fr": "Jusqu’à 6, séparées par des virgules, avec leur núcleo (« C3 Madrid », « C1 Sevilla », « R2N »), ou sans quand vos gares l’indiquent.",
+        "de": "Bis zu 6, durch Kommas getrennt, mit ihrem Núcleo („C3 Madrid“, „C1 Sevilla“, „R2N“) oder ohne, wenn deine Bahnhöfe ihn vorgeben.",
+        "es": "Hasta 6, separadas por comas, con su núcleo («C3 Madrid», «C1 Sevilla», «R2N»), o sin él cuando tus estaciones lo indican."
+      },
+      "placeholder": {
+        "en": "C3 Madrid, C4 Madrid",
+        "fr": "C3 Madrid, C4 Madrid",
+        "de": "C3 Madrid, C4 Madrid",
+        "es": "C3 Madrid, C4 Madrid"
+      },
+      "required": false
+    },
+    {
+      "key": "options_section",
+      "type": "section",
+      "label": {
+        "en": "Options",
+        "fr": "Options",
+        "de": "Optionen",
+        "es": "Opciones"
+      }
+    },
+    {
+      "key": "interval",
+      "type": "select",
+      "label": {
+        "en": "Reading of the real time",
+        "fr": "Lecture du temps réel",
+        "de": "Abruf der Echtzeit",
+        "es": "Lectura del tiempo real"
+      },
+      "description": {
+        "en": "How often the real time is read: one request per network for every followed station. While no station announces anything in the next half hour (at night), every 10 minutes. The timetables are read once a day.",
+        "fr": "La fréquence de lecture du temps réel : une requête par réseau pour toutes les gares suivies. Tant qu’aucune gare n’annonce rien dans la demi-heure (la nuit), toutes les 10 minutes. Les horaires sont lus une fois par jour.",
+        "de": "Wie oft die Echtzeit gelesen wird: eine Anfrage pro Netz für alle verfolgten Bahnhöfe. Solange kein Bahnhof in der nächsten halben Stunde etwas ankündigt (nachts), alle 10 Minuten. Die Fahrpläne werden einmal am Tag gelesen.",
+        "es": "Cada cuánto se lee el tiempo real: una petición por red para todas las estaciones seguidas. Mientras ninguna estación anuncie nada en la próxima media hora (de noche), cada 10 minutos. Los horarios se leen una vez al día."
+      },
+      "options": [
+        {
+          "value": "30",
+          "label": {
+            "en": "Every 30 seconds",
+            "fr": "Toutes les 30 secondes",
+            "de": "Alle 30 Sekunden",
+            "es": "Cada 30 segundos"
+          }
+        },
+        {
+          "value": "60",
+          "label": {
+            "en": "Every minute",
+            "fr": "Toutes les minutes",
+            "de": "Jede Minute",
+            "es": "Cada minuto"
+          }
+        },
+        {
+          "value": "120",
+          "label": {
+            "en": "Every 2 minutes",
+            "fr": "Toutes les 2 minutes",
+            "de": "Alle 2 Minuten",
+            "es": "Cada 2 minutos"
+          }
+        },
+        {
+          "value": "300",
+          "label": {
+            "en": "Every 5 minutes",
+            "fr": "Toutes les 5 minutes",
+            "de": "Alle 5 Minuten",
+            "es": "Cada 5 minutos"
+          }
+        }
+      ],
+      "default": "60",
+      "required": false
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language of the texts",
+        "fr": "Langue des textes",
+        "de": "Sprache der Texte",
+        "es": "Idioma de los textos"
+      },
+      "description": {
+        "en": "Names of the devices, summaries and outputs of the scenes. Automatic: the language of your dashboard, as soon as a Renfe widget has been shown. Station names and traffic messages stay in Spanish.",
+        "fr": "Noms des appareils, résumés et sorties des scènes. Automatique : la langue de votre tableau de bord, dès qu’un widget Renfe a été affiché. Les noms de gares et les messages de trafic restent en espagnol.",
+        "de": "Namen der Geräte, Zusammenfassungen und Ausgaben der Szenen. Automatisch: die Sprache deines Dashboards, sobald ein Renfe-Widget angezeigt wurde. Bahnhofsnamen und Verkehrsmeldungen bleiben auf Spanisch.",
+        "es": "Nombres de los dispositivos, resúmenes y salidas de las escenas. Automático: el idioma de tu panel, en cuanto se haya mostrado un widget de Renfe. Los nombres de estaciones y los avisos quedan en español."
+      },
+      "options": [
+        {
+          "value": "auto",
+          "label": {
+            "en": "Automatic",
+            "fr": "Automatique",
+            "de": "Automatisch",
+            "es": "Automático"
+          }
+        },
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "English",
+            "de": "English",
+            "es": "English"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "Français",
+            "fr": "Français",
+            "de": "Français",
+            "es": "Français"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "Deutsch",
+            "fr": "Deutsch",
+            "de": "Deutsch",
+            "es": "Deutsch"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Español",
+            "fr": "Español",
+            "de": "Español",
+            "es": "Español"
+          }
+        }
+      ],
+      "default": "auto",
+      "required": false
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_connection",
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "description": {
+        "en": "Asks for the timetables again (downloaded only when they changed), finds your stations and lines and reads them right away.",
+        "fr": "Redemande les horaires (téléchargés seulement s’ils ont changé), retrouve vos gares et lignes et les lit aussitôt.",
+        "de": "Fragt die Fahrpläne erneut ab (nur heruntergeladen, wenn sie sich geändert haben), findet deine Bahnhöfe und Linien und liest sie sofort.",
+        "es": "Vuelve a pedir los horarios (descargados solo si cambiaron), encuentra tus estaciones y líneas y las lee al momento."
+      },
+      "timeout_seconds": 120
+    },
+    {
+      "key": "search_station",
+      "label": {
+        "en": "Find a station",
+        "fr": "Chercher une gare",
+        "de": "Bahnhof suchen",
+        "es": "Buscar una estación"
+      },
+      "description": {
+        "en": "Gives the stations holding these words, with their code and their lines.",
+        "fr": "Donne les gares contenant ces mots, avec leur code et leurs lignes.",
+        "de": "Nennt die Bahnhöfe mit diesen Wörtern, mit ihrem Code und ihren Linien.",
+        "es": "Da las estaciones que contienen estas palabras, con su código y sus líneas."
+      },
+      "timeout_seconds": 60,
+      "fields": [
+        {
+          "key": "query",
+          "type": "string",
+          "label": {
+            "en": "Station name",
+            "fr": "Nom de la gare",
+            "de": "Bahnhofsname",
+            "es": "Nombre de la estación"
+          },
+          "placeholder": {
+            "en": "Atocha",
+            "fr": "Atocha",
+            "de": "Atocha",
+            "es": "Atocha"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "key": "add_station",
+      "label": {
+        "en": "Add a station",
+        "fr": "Ajouter une gare",
+        "de": "Bahnhof hinzufügen",
+        "es": "Añadir una estación"
+      },
+      "description": {
+        "en": "Follows one more station, beyond the three of the form: up to 10 more. Its device is then offered in the Discover tab.",
+        "fr": "Suit une gare de plus, au-delà des trois du formulaire : jusqu’à 10 de plus. Son appareil est alors proposé dans l’onglet Découvrir.",
+        "de": "Verfolgt einen weiteren Bahnhof, zusätzlich zu den drei im Formular: bis zu 10 weitere. Sein Gerät wird dann im Tab Entdecken angeboten.",
+        "es": "Sigue una estación más, además de las tres del formulario: hasta 10 más. Su dispositivo se ofrece entonces en la pestaña Descubrir."
+      },
+      "timeout_seconds": 120,
+      "fields": [
+        {
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Its name, or its code (\"Find a station\").",
+            "fr": "Son nom, ou son code (« Chercher une gare »).",
+            "de": "Sein Name oder sein Code („Bahnhof suchen“).",
+            "es": "Su nombre, o su código («Buscar una estación»)."
+          },
+          "placeholder": {
+            "en": "Valencia Estació del Nord",
+            "fr": "Valencia Estació del Nord",
+            "de": "Valencia Estació del Nord",
+            "es": "Valencia Estació del Nord"
+          },
+          "required": true
+        },
+        {
+          "key": "destination",
+          "type": "string",
+          "label": {
+            "en": "Destination",
+            "fr": "Destination",
+            "de": "Ziel",
+            "es": "Destino"
+          },
+          "description": {
+            "en": "Empty for every train leaving the station.",
+            "fr": "Vide pour tous les trains au départ de la gare.",
+            "de": "Leer für alle Züge ab dem Bahnhof.",
+            "es": "Vacío para todos los trenes que salen de la estación."
+          },
+          "placeholder": {
+            "en": "Gandia",
+            "fr": "Gandia",
+            "de": "Gandia",
+            "es": "Gandia"
+          },
+          "required": false
+        },
+        {
+          "key": "line",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "Empty for every line.",
+            "fr": "Vide pour toutes les lignes.",
+            "de": "Leer für alle Linien.",
+            "es": "Vacío para todas las líneas."
+          },
+          "placeholder": {
+            "en": "C1",
+            "fr": "C1",
+            "de": "C1",
+            "es": "C1"
+          },
+          "required": false
+        }
+      ]
+    },
+    {
+      "key": "remove_station",
+      "label": {
+        "en": "Remove a station",
+        "fr": "Retirer une gare",
+        "de": "Bahnhof entfernen",
+        "es": "Quitar una estación"
+      },
+      "description": {
+        "en": "Stops following a station added with the button. Its device stays in Gladys until you delete it.",
+        "fr": "Arrête de suivre une gare ajoutée avec le bouton. Son appareil reste dans Gladys jusqu’à ce que vous le supprimiez.",
+        "de": "Beendet die Verfolgung eines mit der Schaltfläche hinzugefügten Bahnhofs. Sein Gerät bleibt in Gladys, bis du es löschst.",
+        "es": "Deja de seguir una estación añadida con el botón. Su dispositivo queda en Gladys hasta que lo borres."
+      },
+      "timeout_seconds": 30,
+      "fields": [
+        {
+          "key": "station",
+          "type": "string",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "Its number in \"List the stations\", or its name.",
+            "fr": "Son numéro dans « Lister les gares », ou son nom.",
+            "de": "Seine Nummer in „Bahnhöfe auflisten“ oder sein Name.",
+            "es": "Su número en «Listar las estaciones», o su nombre."
+          },
+          "placeholder": {
+            "en": "4",
+            "fr": "4",
+            "de": "4",
+            "es": "4"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "key": "list_stations",
+      "label": {
+        "en": "List the stations",
+        "fr": "Lister les gares",
+        "de": "Bahnhöfe auflisten",
+        "es": "Listar las estaciones"
+      },
+      "description": {
+        "en": "Shows every followed station, numbered: the three of the form, then the ones added with the button.",
+        "fr": "Montre toutes les gares suivies, numérotées : les trois du formulaire, puis celles ajoutées avec le bouton.",
+        "de": "Zeigt alle verfolgten Bahnhöfe nummeriert: die drei des Formulars, dann die mit der Schaltfläche hinzugefügten.",
+        "es": "Muestra todas las estaciones seguidas, numeradas: las tres del formulario y luego las añadidas con el botón."
+      },
+      "timeout_seconds": 10
+    },
+    {
+      "key": "diagnostic",
+      "label": {
+        "en": "Diagnostic",
+        "fr": "Diagnostic",
+        "de": "Diagnose",
+        "es": "Diagnóstico"
+      },
+      "description": {
+        "en": "Writes to the Logs tab the stations and lines found, the timetables kept, the last trains read, the last errors and the requests made, for a report on GitHub or the forum.",
+        "fr": "Écrit dans l’onglet Journaux les gares et lignes trouvées, les horaires gardés, les derniers trains lus, les dernières erreurs et les requêtes faites, pour un signalement sur GitHub ou le forum.",
+        "de": "Schreibt in den Tab Protokolle die gefundenen Bahnhöfe und Linien, die gespeicherten Fahrpläne, die zuletzt gelesenen Züge, die letzten Fehler und die gestellten Anfragen, für eine Meldung auf GitHub oder im Forum.",
+        "es": "Escribe en la pestaña Registros las estaciones y líneas encontradas, los horarios guardados, los últimos trenes leídos, los últimos errores y las peticiones hechas, para un informe en GitHub o el foro."
+      },
+      "timeout_seconds": 10
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "departure_soon",
+      "label": {
+        "en": "Renfe: departure soon",
+        "fr": "Renfe : départ imminent",
+        "de": "Renfe: Abfahrt bald",
+        "es": "Renfe: salida próxima"
+      },
+      "description": {
+        "en": "A train of a followed station leaves in N minutes, counted on its real-time estimate.",
+        "fr": "Un train d’une gare suivie part dans N minutes, compté sur son estimation en temps réel.",
+        "de": "Ein Zug eines verfolgten Bahnhofs fährt in N Minuten ab, gezählt nach seiner Echtzeitprognose.",
+        "es": "Un tren de una estación seguida sale dentro de N minutos, contados sobre su estimación en tiempo real."
+      },
+      "fields": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "A station device of the integration. Leave empty for any station.",
+            "fr": "Un appareil gare de l’intégration. Laissez vide pour n’importe quelle gare.",
+            "de": "Ein Bahnhofsgerät der Integration. Leer lassen für jeden Bahnhof.",
+            "es": "Un dispositivo estación de la integración. Déjalo vacío para cualquier estación."
+          },
+          "required": false
+        },
+        {
+          "key": "minutes",
+          "type": "select",
+          "label": {
+            "en": "Leaves in",
+            "fr": "Part dans",
+            "de": "Fährt ab in",
+            "es": "Sale dentro de"
+          },
+          "options": [
+            {
+              "value": "2",
+              "label": {
+                "en": "2 min",
+                "fr": "2 min",
+                "de": "2 min",
+                "es": "2 min"
+              }
+            },
+            {
+              "value": "3",
+              "label": {
+                "en": "3 min",
+                "fr": "3 min",
+                "de": "3 min",
+                "es": "3 min"
+              }
+            },
+            {
+              "value": "5",
+              "label": {
+                "en": "5 min",
+                "fr": "5 min",
+                "de": "5 min",
+                "es": "5 min"
+              }
+            },
+            {
+              "value": "10",
+              "label": {
+                "en": "10 min",
+                "fr": "10 min",
+                "de": "10 min",
+                "es": "10 min"
+              }
+            },
+            {
+              "value": "15",
+              "label": {
+                "en": "15 min",
+                "fr": "15 min",
+                "de": "15 min",
+                "es": "15 min"
+              }
+            },
+            {
+              "value": "20",
+              "label": {
+                "en": "20 min",
+                "fr": "20 min",
+                "de": "20 min",
+                "es": "20 min"
+              }
+            },
+            {
+              "value": "30",
+              "label": {
+                "en": "30 min",
+                "fr": "30 min",
+                "de": "30 min",
+                "es": "30 min"
+              }
+            }
+          ],
+          "required": true
+        }
+      ],
+      "variables": [
+        {
+          "key": "station_name",
+          "type": "string",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          }
+        },
+        {
+          "key": "line",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "\"C3\", \"AVE\".",
+            "fr": "« C3 », « AVE ».",
+            "de": "„C3“, „AVE“.",
+            "es": "«C3», «AVE»."
+          }
+        },
+        {
+          "key": "train_number",
+          "type": "string",
+          "label": {
+            "en": "Train number",
+            "fr": "Numéro du train",
+            "de": "Zugnummer",
+            "es": "Número de tren"
+          },
+          "description": {
+            "en": "\"3063\": the number on the ticket.",
+            "fr": "« 3063 » : le numéro du billet.",
+            "de": "„3063“: die Nummer auf dem Ticket.",
+            "es": "«3063»: el número del billete."
+          }
+        },
+        {
+          "key": "destination",
+          "type": "string",
+          "label": {
+            "en": "Destination of the train",
+            "fr": "Destination du train",
+            "de": "Ziel des Zuges",
+            "es": "Destino del tren"
+          }
+        },
+        {
+          "key": "time",
+          "type": "string",
+          "label": {
+            "en": "Expected time (HH:MM)",
+            "fr": "Heure estimée (HH:MM)",
+            "de": "Erwartete Zeit (HH:MM)",
+            "es": "Hora estimada (HH:MM)"
+          }
+        },
+        {
+          "key": "track",
+          "type": "string",
+          "label": {
+            "en": "Track",
+            "fr": "Voie",
+            "de": "Gleis",
+            "es": "Vía"
+          },
+          "description": {
+            "en": "Cercanías only, once Renfe announces it; empty otherwise.",
+            "fr": "Cercanías seulement, dès que Renfe l’annonce ; vide sinon.",
+            "de": "Nur Cercanías, sobald Renfe es ankündigt; sonst leer.",
+            "es": "Solo Cercanías, en cuanto Renfe la anuncia; vacía si no."
+          }
+        },
+        {
+          "key": "delay_minutes",
+          "type": "number",
+          "label": {
+            "en": "Delay (min)",
+            "fr": "Retard (min)",
+            "de": "Verspätung (Min.)",
+            "es": "Retraso (min)"
+          },
+          "description": {
+            "en": "0 when on time, or when only the timetable is known.",
+            "fr": "0 à l’heure, ou quand seul l’horaire est connu.",
+            "de": "0 bei Pünktlichkeit oder wenn nur der Fahrplan bekannt ist.",
+            "es": "0 si va puntual, o si solo se conoce el horario."
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, bereit für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "departure_delayed",
+      "label": {
+        "en": "Renfe: train late",
+        "fr": "Renfe : train en retard",
+        "de": "Renfe: Zug verspätet",
+        "es": "Renfe: tren con retraso"
+      },
+      "description": {
+        "en": "A train of a followed station leaving within two hours is N minutes late or more: once per train and threshold.",
+        "fr": "Un train d’une gare suivie partant dans les deux heures a N minutes de retard ou plus : une fois par train et par seuil.",
+        "de": "Ein Zug eines verfolgten Bahnhofs, der in den nächsten zwei Stunden abfährt, hat N Minuten Verspätung oder mehr: einmal pro Zug und Schwelle.",
+        "es": "Un tren de una estación seguida que sale en las próximas dos horas lleva N minutos de retraso o más: una vez por tren y umbral."
+      },
+      "fields": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "A station device of the integration. Leave empty for any station.",
+            "fr": "Un appareil gare de l’intégration. Laissez vide pour n’importe quelle gare.",
+            "de": "Ein Bahnhofsgerät der Integration. Leer lassen für jeden Bahnhof.",
+            "es": "Un dispositivo estación de la integración. Déjalo vacío para cualquier estación."
+          },
+          "required": false
+        },
+        {
+          "key": "minutes",
+          "type": "select",
+          "label": {
+            "en": "Late by at least",
+            "fr": "En retard d’au moins",
+            "de": "Verspätet um mindestens",
+            "es": "Con un retraso de al menos"
+          },
+          "options": [
+            {
+              "value": "5",
+              "label": {
+                "en": "5 min",
+                "fr": "5 min",
+                "de": "5 min",
+                "es": "5 min"
+              }
+            },
+            {
+              "value": "10",
+              "label": {
+                "en": "10 min",
+                "fr": "10 min",
+                "de": "10 min",
+                "es": "10 min"
+              }
+            },
+            {
+              "value": "15",
+              "label": {
+                "en": "15 min",
+                "fr": "15 min",
+                "de": "15 min",
+                "es": "15 min"
+              }
+            },
+            {
+              "value": "30",
+              "label": {
+                "en": "30 min",
+                "fr": "30 min",
+                "de": "30 min",
+                "es": "30 min"
+              }
+            },
+            {
+              "value": "60",
+              "label": {
+                "en": "60 min",
+                "fr": "60 min",
+                "de": "60 min",
+                "es": "60 min"
+              }
+            }
+          ],
+          "required": true
+        }
+      ],
+      "variables": [
+        {
+          "key": "station_name",
+          "type": "string",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          }
+        },
+        {
+          "key": "line",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "\"C3\", \"AVE\".",
+            "fr": "« C3 », « AVE ».",
+            "de": "„C3“, „AVE“.",
+            "es": "«C3», «AVE»."
+          }
+        },
+        {
+          "key": "train_number",
+          "type": "string",
+          "label": {
+            "en": "Train number",
+            "fr": "Numéro du train",
+            "de": "Zugnummer",
+            "es": "Número de tren"
+          },
+          "description": {
+            "en": "\"3063\": the number on the ticket.",
+            "fr": "« 3063 » : le numéro du billet.",
+            "de": "„3063“: die Nummer auf dem Ticket.",
+            "es": "«3063»: el número del billete."
+          }
+        },
+        {
+          "key": "destination",
+          "type": "string",
+          "label": {
+            "en": "Destination of the train",
+            "fr": "Destination du train",
+            "de": "Ziel des Zuges",
+            "es": "Destino del tren"
+          }
+        },
+        {
+          "key": "time",
+          "type": "string",
+          "label": {
+            "en": "Scheduled time (HH:MM)",
+            "fr": "Heure prévue (HH:MM)",
+            "de": "Planmäßige Zeit (HH:MM)",
+            "es": "Hora prevista (HH:MM)"
+          }
+        },
+        {
+          "key": "expected_time",
+          "type": "string",
+          "label": {
+            "en": "Expected time (HH:MM)",
+            "fr": "Heure estimée (HH:MM)",
+            "de": "Erwartete Zeit (HH:MM)",
+            "es": "Hora estimada (HH:MM)"
+          }
+        },
+        {
+          "key": "delay_minutes",
+          "type": "number",
+          "label": {
+            "en": "Delay (min)",
+            "fr": "Retard (min)",
+            "de": "Verspätung (Min.)",
+            "es": "Retraso (min)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, bereit für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "departure_cancelled",
+      "label": {
+        "en": "Renfe: train cancelled",
+        "fr": "Renfe : train supprimé",
+        "de": "Renfe: Zug fällt aus",
+        "es": "Renfe: tren suprimido"
+      },
+      "description": {
+        "en": "A train of a followed station leaving within two hours is cancelled, or does not stop there any more.",
+        "fr": "Un train d’une gare suivie partant dans les deux heures est supprimé, ou ne s’y arrête plus.",
+        "de": "Ein Zug eines verfolgten Bahnhofs, der in den nächsten zwei Stunden abfährt, fällt aus oder hält dort nicht mehr.",
+        "es": "Un tren de una estación seguida que sale en las próximas dos horas está suprimido, o ya no para allí."
+      },
+      "fields": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "A station device of the integration. Leave empty for any station.",
+            "fr": "Un appareil gare de l’intégration. Laissez vide pour n’importe quelle gare.",
+            "de": "Ein Bahnhofsgerät der Integration. Leer lassen für jeden Bahnhof.",
+            "es": "Un dispositivo estación de la integración. Déjalo vacío para cualquier estación."
+          },
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "station_name",
+          "type": "string",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          }
+        },
+        {
+          "key": "line",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "\"C3\", \"AVE\".",
+            "fr": "« C3 », « AVE ».",
+            "de": "„C3“, „AVE“.",
+            "es": "«C3», «AVE»."
+          }
+        },
+        {
+          "key": "train_number",
+          "type": "string",
+          "label": {
+            "en": "Train number",
+            "fr": "Numéro du train",
+            "de": "Zugnummer",
+            "es": "Número de tren"
+          },
+          "description": {
+            "en": "\"3063\": the number on the ticket.",
+            "fr": "« 3063 » : le numéro du billet.",
+            "de": "„3063“: die Nummer auf dem Ticket.",
+            "es": "«3063»: el número del billete."
+          }
+        },
+        {
+          "key": "destination",
+          "type": "string",
+          "label": {
+            "en": "Destination of the train",
+            "fr": "Destination du train",
+            "de": "Ziel des Zuges",
+            "es": "Destino del tren"
+          }
+        },
+        {
+          "key": "time",
+          "type": "string",
+          "label": {
+            "en": "Scheduled time (HH:MM)",
+            "fr": "Heure prévue (HH:MM)",
+            "de": "Planmäßige Zeit (HH:MM)",
+            "es": "Hora prevista (HH:MM)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, bereit für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "line_disrupted",
+      "label": {
+        "en": "Renfe: line disrupted",
+        "fr": "Renfe : ligne perturbée",
+        "de": "Renfe: Linie gestört",
+        "es": "Renfe: línea alterada"
+      },
+      "description": {
+        "en": "A followed line becomes disrupted or heavily disrupted: an alert of Renfe under way (works, strike, road replacement, interruption).",
+        "fr": "Une ligne suivie devient perturbée ou très perturbée : une alerte de Renfe en cours (travaux, grève, bus de remplacement, interruption).",
+        "de": "Eine verfolgte Linie wird gestört oder stark gestört: eine laufende Meldung von Renfe (Bauarbeiten, Streik, Ersatzbus, Unterbrechung).",
+        "es": "Una línea seguida pasa a alterada o muy alterada: un aviso de Renfe en curso (obras, huelga, servicio por carretera, interrupción)."
+      },
+      "fields": [
+        {
+          "key": "line",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "A line device of the integration. Leave empty for any line.",
+            "fr": "Un appareil ligne de l’intégration. Laissez vide pour n’importe quelle ligne.",
+            "de": "Ein Liniengerät der Integration. Leer lassen für jede Linie.",
+            "es": "Un dispositivo línea de la integración. Déjalo vacío para cualquier línea."
+          },
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "line_name",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "\"Cercanías Madrid C3\", \"Rodalies R2N\".",
+            "fr": "« Cercanías Madrid C3 », « Rodalies R2N ».",
+            "de": "„Cercanías Madrid C3“, „Rodalies R2N“.",
+            "es": "«Cercanías Madrid C3», «Rodalies R2N»."
+          }
+        },
+        {
+          "key": "state",
+          "type": "string",
+          "label": {
+            "en": "State (code)",
+            "fr": "État (code)",
+            "de": "Zustand (Code)",
+            "es": "Estado (código)"
+          },
+          "description": {
+            "en": "normal, info, disrupted or major.",
+            "fr": "normal, info, disrupted ou major.",
+            "de": "normal, info, disrupted oder major.",
+            "es": "normal, info, disrupted o major."
+          }
+        },
+        {
+          "key": "title",
+          "type": "string",
+          "label": {
+            "en": "Title of the message",
+            "fr": "Titre du message",
+            "de": "Titel der Meldung",
+            "es": "Título del mensaje"
+          },
+          "description": {
+            "en": "Its header, or the first sentence of its text.",
+            "fr": "Son titre, ou la première phrase de son texte.",
+            "de": "Ihr Titel oder der erste Satz ihres Textes.",
+            "es": "Su título, o la primera frase de su texto."
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Text of the message",
+            "fr": "Texte du message",
+            "de": "Text der Meldung",
+            "es": "Texto del mensaje"
+          }
+        },
+        {
+          "key": "start",
+          "type": "string",
+          "label": {
+            "en": "Start (DD/MM HH:MM)",
+            "fr": "Début (JJ/MM HH:MM)",
+            "de": "Beginn (TT/MM HH:MM)",
+            "es": "Inicio (DD/MM HH:MM)"
+          }
+        },
+        {
+          "key": "end",
+          "type": "string",
+          "label": {
+            "en": "End (DD/MM HH:MM)",
+            "fr": "Fin (JJ/MM HH:MM)",
+            "de": "Ende (TT/MM HH:MM)",
+            "es": "Fin (DD/MM HH:MM)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, bereit für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "line_restored",
+      "label": {
+        "en": "Renfe: back to normal",
+        "fr": "Renfe : fin de perturbation",
+        "de": "Renfe: wieder normal",
+        "es": "Renfe: fin de la incidencia"
+      },
+      "description": {
+        "en": "A followed line that was disrupted is back to normal: no disruption under way any more.",
+        "fr": "Une ligne suivie qui était perturbée revient à la normale : plus aucune perturbation en cours.",
+        "de": "Eine verfolgte Linie, die gestört war, ist wieder normal: keine laufende Störung mehr.",
+        "es": "Una línea seguida que estaba alterada vuelve a la normalidad: ya no hay incidencias en curso."
+      },
+      "fields": [
+        {
+          "key": "line",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "A line device of the integration. Leave empty for any line.",
+            "fr": "Un appareil ligne de l’intégration. Laissez vide pour n’importe quelle ligne.",
+            "de": "Ein Liniengerät der Integration. Leer lassen für jede Linie.",
+            "es": "Un dispositivo línea de la integración. Déjalo vacío para cualquier línea."
+          },
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "line_name",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "\"Cercanías Madrid C3\", \"Rodalies R2N\".",
+            "fr": "« Cercanías Madrid C3 », « Rodalies R2N ».",
+            "de": "„Cercanías Madrid C3“, „Rodalies R2N“.",
+            "es": "«Cercanías Madrid C3», «Rodalies R2N»."
+          }
+        },
+        {
+          "key": "state",
+          "type": "string",
+          "label": {
+            "en": "New state",
+            "fr": "Nouvel état",
+            "de": "Neuer Zustand",
+            "es": "Nuevo estado"
+          },
+          "description": {
+            "en": "normal or info (a message under way, normal service).",
+            "fr": "normal ou info (un message en cours, service normal).",
+            "de": "normal oder info (eine aktuelle Meldung, normaler Betrieb).",
+            "es": "normal o info (un aviso en curso, servicio normal)."
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, bereit für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    },
+    {
+      "key": "traffic_message",
+      "label": {
+        "en": "Renfe: new traffic message",
+        "fr": "Renfe : nouveau message trafic",
+        "de": "Renfe: neue Verkehrsmeldung",
+        "es": "Renfe: nuevo aviso"
+      },
+      "description": {
+        "en": "Renfe publishes a new alert about a followed line (works, modified frequencies, strike, road replacement).",
+        "fr": "Renfe publie une nouvelle alerte sur une ligne suivie (travaux, fréquences modifiées, grève, bus de remplacement).",
+        "de": "Renfe veröffentlicht eine neue Meldung zu einer verfolgten Linie (Bauarbeiten, geänderter Takt, Streik, Ersatzbus).",
+        "es": "Renfe publica un nuevo aviso sobre una línea seguida (obras, frecuencias modificadas, huelga, servicio por carretera)."
+      },
+      "fields": [
+        {
+          "key": "line",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "A line device of the integration. Leave empty for any line.",
+            "fr": "Un appareil ligne de l’intégration. Laissez vide pour n’importe quelle ligne.",
+            "de": "Ein Liniengerät der Integration. Leer lassen für jede Linie.",
+            "es": "Un dispositivo línea de la integración. Déjalo vacío para cualquier línea."
+          },
+          "required": false
+        },
+        {
+          "key": "kind",
+          "type": "multi_select",
+          "label": {
+            "en": "Kind",
+            "fr": "Type",
+            "de": "Art",
+            "es": "Tipo"
+          },
+          "description": {
+            "en": "Leave empty for every kind.",
+            "fr": "Laissez vide pour tous les types.",
+            "de": "Leer lassen für alle Arten.",
+            "es": "Déjalo vacío para todos los tipos."
+          },
+          "options": [
+            {
+              "value": "info",
+              "label": {
+                "en": "Information",
+                "fr": "Information",
+                "de": "Information",
+                "es": "Información"
+              }
+            },
+            {
+              "value": "disrupted",
+              "label": {
+                "en": "Disruption",
+                "fr": "Perturbation",
+                "de": "Störung",
+                "es": "Incidencia"
+              }
+            },
+            {
+              "value": "major",
+              "label": {
+                "en": "Heavy disruption",
+                "fr": "Forte perturbation",
+                "de": "Starke Störung",
+                "es": "Incidencia grave"
+              }
+            }
+          ],
+          "required": false
+        }
+      ],
+      "variables": [
+        {
+          "key": "line_name",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "\"Cercanías Madrid C3\", \"Rodalies R2N\".",
+            "fr": "« Cercanías Madrid C3 », « Rodalies R2N ».",
+            "de": "„Cercanías Madrid C3“, „Rodalies R2N“.",
+            "es": "«Cercanías Madrid C3», «Rodalies R2N»."
+          }
+        },
+        {
+          "key": "kind",
+          "type": "string",
+          "label": {
+            "en": "Kind (code)",
+            "fr": "Type (code)",
+            "de": "Art (Code)",
+            "es": "Tipo (código)"
+          },
+          "description": {
+            "en": "info, disrupted or major.",
+            "fr": "info, disrupted ou major.",
+            "de": "info, disrupted oder major.",
+            "es": "info, disrupted o major."
+          }
+        },
+        {
+          "key": "title",
+          "type": "string",
+          "label": {
+            "en": "Title of the message",
+            "fr": "Titre du message",
+            "de": "Titel der Meldung",
+            "es": "Título del mensaje"
+          },
+          "description": {
+            "en": "Its header, or the first sentence of its text.",
+            "fr": "Son titre, ou la première phrase de son texte.",
+            "de": "Ihr Titel oder der erste Satz ihres Textes.",
+            "es": "Su título, o la primera frase de su texto."
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Text of the message",
+            "fr": "Texte du message",
+            "de": "Text der Meldung",
+            "es": "Texto del mensaje"
+          }
+        },
+        {
+          "key": "start",
+          "type": "string",
+          "label": {
+            "en": "Start (DD/MM HH:MM)",
+            "fr": "Début (JJ/MM HH:MM)",
+            "de": "Beginn (TT/MM HH:MM)",
+            "es": "Inicio (DD/MM HH:MM)"
+          }
+        },
+        {
+          "key": "end",
+          "type": "string",
+          "label": {
+            "en": "End (DD/MM HH:MM)",
+            "fr": "Fin (JJ/MM HH:MM)",
+            "de": "Ende (TT/MM HH:MM)",
+            "es": "Fin (DD/MM HH:MM)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, bereit für eine Nachricht.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "get_next_departures",
+      "label": {
+        "en": "Renfe: next trains",
+        "fr": "Renfe : prochains trains",
+        "de": "Renfe: nächste Züge",
+        "es": "Renfe: próximos trenes"
+      },
+      "description": {
+        "en": "The next two trains of a followed station, the delay of the first one, and a sentence for a message.",
+        "fr": "Les deux prochains trains d’une gare suivie, le retard du premier et une phrase pour un message.",
+        "de": "Die nächsten zwei Züge eines verfolgten Bahnhofs, die Verspätung des ersten und ein Satz für eine Nachricht.",
+        "es": "Los dos próximos trenes de una estación seguida, el retraso del primero y una frase para un mensaje."
+      },
+      "timeout_seconds": 60,
+      "fields": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "A station device of the integration. Leave empty for the first station.",
+            "fr": "Un appareil gare de l’intégration. Laissez vide pour la première gare.",
+            "de": "Ein Bahnhofsgerät der Integration. Leer lassen für den ersten Bahnhof.",
+            "es": "Un dispositivo estación de la integración. Déjalo vacío para la primera estación."
+          },
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "key": "station_name",
+          "type": "string",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          }
+        },
+        {
+          "key": "found",
+          "type": "boolean",
+          "label": {
+            "en": "Train found",
+            "fr": "Train trouvé",
+            "de": "Zug gefunden",
+            "es": "Tren encontrado"
+          }
+        },
+        {
+          "key": "line",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          }
+        },
+        {
+          "key": "train_number",
+          "type": "string",
+          "label": {
+            "en": "Train number",
+            "fr": "Numéro du train",
+            "de": "Zugnummer",
+            "es": "Número de tren"
+          }
+        },
+        {
+          "key": "destination",
+          "type": "string",
+          "label": {
+            "en": "Destination of the train",
+            "fr": "Destination du train",
+            "de": "Ziel des Zuges",
+            "es": "Destino del tren"
+          }
+        },
+        {
+          "key": "minutes",
+          "type": "number",
+          "label": {
+            "en": "Wait (min, -1 if none)",
+            "fr": "Attente (min, -1 si aucun)",
+            "de": "Wartezeit (Min., -1 wenn keiner)",
+            "es": "Espera (min, -1 si no hay)"
+          }
+        },
+        {
+          "key": "time",
+          "type": "string",
+          "label": {
+            "en": "Expected time (HH:MM)",
+            "fr": "Heure estimée (HH:MM)",
+            "de": "Erwartete Zeit (HH:MM)",
+            "es": "Hora estimada (HH:MM)"
+          }
+        },
+        {
+          "key": "arrival_time",
+          "type": "string",
+          "label": {
+            "en": "Arrival at the destination (HH:MM)",
+            "fr": "Arrivée à destination (HH:MM)",
+            "de": "Ankunft am Ziel (HH:MM)",
+            "es": "Llegada al destino (HH:MM)"
+          },
+          "description": {
+            "en": "Empty without a destination station.",
+            "fr": "Vide sans gare de destination.",
+            "de": "Leer ohne Zielbahnhof.",
+            "es": "Vacía sin estación de destino."
+          }
+        },
+        {
+          "key": "track",
+          "type": "string",
+          "label": {
+            "en": "Track",
+            "fr": "Voie",
+            "de": "Gleis",
+            "es": "Vía"
+          }
+        },
+        {
+          "key": "realtime",
+          "type": "boolean",
+          "label": {
+            "en": "Followed in real time",
+            "fr": "Suivi en temps réel",
+            "de": "In Echtzeit verfolgt",
+            "es": "Seguido en tiempo real"
+          }
+        },
+        {
+          "key": "delay_minutes",
+          "type": "number",
+          "label": {
+            "en": "Delay (min)",
+            "fr": "Retard (min)",
+            "de": "Verspätung (Min.)",
+            "es": "Retraso (min)"
+          }
+        },
+        {
+          "key": "following_minutes",
+          "type": "number",
+          "label": {
+            "en": "Wait for the following one (min)",
+            "fr": "Attente du suivant (min)",
+            "de": "Wartezeit des folgenden (Min.)",
+            "es": "Espera del siguiente (min)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          }
+        }
+      ]
+    },
+    {
+      "key": "get_line_traffic",
+      "label": {
+        "en": "Renfe: traffic of a line",
+        "fr": "Renfe : trafic d’une ligne",
+        "de": "Renfe: Verkehrslage einer Linie",
+        "es": "Renfe: estado de una línea"
+      },
+      "description": {
+        "en": "The state of a line, its latest message and a sentence for a message.",
+        "fr": "L’état d’une ligne, son dernier message et une phrase pour un message.",
+        "de": "Der Zustand einer Linie, ihre letzte Meldung und ein Satz für eine Nachricht.",
+        "es": "El estado de una línea, su último mensaje y una frase para un mensaje."
+      },
+      "timeout_seconds": 30,
+      "fields": [
+        {
+          "key": "line",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          },
+          "description": {
+            "en": "A line device of the integration. Leave empty for the first line.",
+            "fr": "Un appareil ligne de l’intégration. Laissez vide pour la première ligne.",
+            "de": "Ein Linien-Gerät der Integration. Leer lassen für die erste Linie.",
+            "es": "Un dispositivo línea de la integración. Déjalo vacío para la primera línea."
+          },
+          "required": false
+        }
+      ],
+      "outputs": [
+        {
+          "key": "line_name",
+          "type": "string",
+          "label": {
+            "en": "Line",
+            "fr": "Ligne",
+            "de": "Linie",
+            "es": "Línea"
+          }
+        },
+        {
+          "key": "state",
+          "type": "string",
+          "label": {
+            "en": "State (code)",
+            "fr": "État (code)",
+            "de": "Zustand (Code)",
+            "es": "Estado (código)"
+          },
+          "description": {
+            "en": "normal, info, disrupted, major or unknown.",
+            "fr": "normal, info, disrupted, major ou unknown.",
+            "de": "normal, info, disrupted, major oder unknown.",
+            "es": "normal, info, disrupted, major o unknown."
+          }
+        },
+        {
+          "key": "state_label",
+          "type": "string",
+          "label": {
+            "en": "State",
+            "fr": "État",
+            "de": "Zustand",
+            "es": "Estado"
+          }
+        },
+        {
+          "key": "disrupted",
+          "type": "boolean",
+          "label": {
+            "en": "Disrupted",
+            "fr": "Perturbée",
+            "de": "Gestört",
+            "es": "Alterada"
+          }
+        },
+        {
+          "key": "message_count",
+          "type": "number",
+          "label": {
+            "en": "Traffic messages under way",
+            "fr": "Infos trafic en cours",
+            "de": "Aktuelle Verkehrsmeldungen",
+            "es": "Avisos en curso"
+          }
+        },
+        {
+          "key": "title",
+          "type": "string",
+          "label": {
+            "en": "Title of the latest message",
+            "fr": "Titre du dernier message",
+            "de": "Titel der letzten Meldung",
+            "es": "Título del último mensaje"
+          }
+        },
+        {
+          "key": "message",
+          "type": "string",
+          "label": {
+            "en": "Text of the latest message",
+            "fr": "Texte du dernier message",
+            "de": "Text der letzten Meldung",
+            "es": "Texto del último mensaje"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
+          },
+          "description": {
+            "en": "A sentence ready to put in a message.",
+            "fr": "Une phrase prête à mettre dans un message.",
+            "de": "Ein Satz, der direkt in eine Nachricht passt.",
+            "es": "Una frase lista para poner en un mensaje."
+          }
+        }
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "key": "departures",
+      "label": {
+        "en": "Renfe departures",
+        "fr": "Départs Renfe",
+        "de": "Renfe Abfahrten",
+        "es": "Salidas Renfe"
+      },
+      "description": {
+        "en": "The next trains of a station, corrected in real time.",
+        "fr": "Les prochains trains d’une gare, corrigés en temps réel.",
+        "de": "Die nächsten Züge eines Bahnhofs, in Echtzeit korrigiert.",
+        "es": "Los próximos trenes de una estación, corregidos en tiempo real."
+      },
+      "icon": "clock",
+      "settings": [
+        {
+          "key": "station",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Station",
+            "fr": "Gare",
+            "de": "Bahnhof",
+            "es": "Estación"
+          },
+          "description": {
+            "en": "A station device of the integration. Leave empty for the first station, or when you tick devices in “Several stations” below.",
+            "fr": "Un appareil gare de l’intégration. Laissez vide pour la première gare, ou si vous cochez des appareils dans « Plusieurs gares » ci-dessous.",
+            "de": "Ein Bahnhofsgerät der Integration. Leer lassen für den ersten Bahnhof oder wenn du unten unter „Mehrere Bahnhöfe“ Geräte ankreuzt.",
+            "es": "Un dispositivo estación de la integración. Déjalo vacío para la primera estación, o si marcas dispositivos en «Varias estaciones» más abajo."
+          },
+          "required": false
+        },
+        {
+          "key": "stations",
+          "type": "multi_select",
+          "source": "devices",
+          "label": {
+            "en": "Several stations",
+            "fr": "Plusieurs gares",
+            "de": "Mehrere Bahnhöfe",
+            "es": "Varias estaciones"
+          },
+          "description": {
+            "en": "Station devices shown together, instead of the station above. Devices of one station (one per destination) are merged under its name.",
+            "fr": "Des appareils gares affichés ensemble, à la place de la gare ci-dessus. Les appareils d’une même gare (un par destination) sont réunis sous son nom.",
+            "de": "Bahnhofsgeräte, die zusammen angezeigt werden, statt des Bahnhofs oben. Geräte desselben Bahnhofs (eines pro Ziel) werden unter seinem Namen zusammengefasst.",
+            "es": "Dispositivos estación mostrados juntos, en lugar de la estación de arriba. Los dispositivos de una misma estación (uno por destino) se reúnen bajo su nombre."
+          },
+          "required": false
+        },
+        {
+          "key": "station_name",
+          "type": "string",
+          "label": {
+            "en": "Other station",
+            "fr": "Autre gare",
+            "de": "Anderer Bahnhof",
+            "es": "Otra estación"
+          },
+          "description": {
+            "en": "A station name or its code (\"Find a station\"), to show a station that is not followed: all its trains.",
+            "fr": "Un nom de gare ou son code (« Chercher une gare »), pour afficher une gare non suivie : tous ses trains.",
+            "de": "Ein Bahnhofsname oder sein Code („Bahnhof suchen“), um einen nicht verfolgten Bahnhof anzuzeigen: alle seine Züge.",
+            "es": "Un nombre de estación o su código («Buscar una estación»), para mostrar una estación no seguida: todos sus trenes."
+          },
+          "placeholder": {
+            "en": "Barcelona-Sants",
+            "fr": "Barcelona-Sants",
+            "de": "Barcelona-Sants",
+            "es": "Barcelona-Sants"
+          },
+          "required": false
+        },
+        {
+          "key": "line",
+          "type": "string",
+          "label": {
+            "en": "Line of the other station",
+            "fr": "Ligne de l’autre gare",
+            "de": "Linie des anderen Bahnhofs",
+            "es": "Línea de la otra estación"
+          },
+          "placeholder": {
+            "en": "R2N",
+            "fr": "R2N",
+            "de": "R2N",
+            "es": "R2N"
+          },
+          "required": false
+        },
+        {
+          "key": "count",
+          "type": "number",
+          "label": {
+            "en": "Routes shown",
+            "fr": "Trajets affichés",
+            "de": "Angezeigte Fahrten",
+            "es": "Trayectos mostrados"
+          },
+          "description": {
+            "en": "One row per line and destination, with its next trains.",
+            "fr": "Une rangée par ligne et destination, avec ses prochains trains.",
+            "de": "Eine Zeile pro Linie und Ziel, mit ihren nächsten Zügen.",
+            "es": "Una fila por línea y destino, con sus próximos trenes."
+          },
+          "min": 1,
+          "max": 8,
+          "default": 6,
+          "required": false
+        }
+      ]
+    },
+    {
+      "key": "traffic",
+      "label": {
+        "en": "Renfe traffic",
+        "fr": "Trafic Renfe",
+        "de": "Renfe Verkehrslage",
+        "es": "Estado del servicio Renfe"
+      },
+      "description": {
+        "en": "The state of Cercanías lines and their messages under way.",
+        "fr": "L’état de lignes de Cercanías et leurs messages en cours.",
+        "de": "Der Zustand von Cercanías-Linien und ihre aktuellen Meldungen.",
+        "es": "El estado de líneas de Cercanías y sus avisos en curso."
+      },
+      "icon": "alert-triangle",
+      "settings": [
+        {
+          "key": "lines",
+          "type": "string",
+          "label": {
+            "en": "Lines",
+            "fr": "Lignes",
+            "de": "Linien",
+            "es": "Líneas"
+          },
+          "description": {
+            "en": "Cercanías lines typed here, instead of the followed ones (\"C3 Madrid, R2N\"). Empty: the followed lines, or the Cercanías lines of your stations.",
+            "fr": "Lignes de Cercanías saisies ici, à la place des lignes suivies (« C3 Madrid, R2N »). Vide : les lignes suivies, ou les lignes de Cercanías de vos gares.",
+            "de": "Hier eingegebene Cercanías-Linien statt der verfolgten („C3 Madrid, R2N“). Leer: die verfolgten Linien oder die Cercanías-Linien deiner Bahnhöfe.",
+            "es": "Líneas de Cercanías escritas aquí, en lugar de las seguidas («C3 Madrid, R2N»). Vacío: las líneas seguidas, o las líneas de Cercanías de tus estaciones."
+          },
+          "placeholder": {
+            "en": "C3 Madrid, C4 Madrid",
+            "fr": "C3 Madrid, C4 Madrid",
+            "de": "C3 Madrid, C4 Madrid",
+            "es": "C3 Madrid, C4 Madrid"
+          },
+          "required": false
+        }
+      ]
+    }
+  ]
+}

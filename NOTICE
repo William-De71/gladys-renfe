@@ -1,0 +1,16 @@
+Gladys Renfe integration
+Copyright 2026 William Deren
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The timetables (GTFS of the long and medium distance, GTFS of the Cercanías)
+and their real time (GTFS-RT trip updates, vehicle positions and service
+alerts) come from the open data of Renfe (https://data.renfe.com), under the
+Creative Commons Attribution 4.0 licence:
+https://creativecommons.org/licenses/by/4.0/. Source: Renfe (data.renfe.com).
+The integration reads them as published; the widgets show the source (Renfe)
+and the time of each reading. The files under test/fixtures are extracts of
+these data (17 November 2026), kept under the same licence.
+
+This community integration is not affiliated with, endorsed or sponsored by
+Renfe Operadora, Renfe Viajeros or Adif.

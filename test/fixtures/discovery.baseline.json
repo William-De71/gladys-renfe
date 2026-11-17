@@ -1,0 +1,623 @@
+{
+  "version": "0.1.0",
+  "devices": {
+    "route": {
+      "external_id": "ext:renfe:station:18000_60200_10-c3",
+      "should_poll": false,
+      "params": ["RENFE_STATION", "RENFE_DESTINATION", "RENFE_LINE"],
+      "features": [
+        {
+          "external_id": "ext:renfe:station:18000_60200_10-c3:next",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:18000_60200_10-c3:wait",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 180,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:18000_60200_10-c3:following",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 180,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:18000_60200_10-c3:delay",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 300,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "station": {
+      "external_id": "ext:renfe:station:17000",
+      "should_poll": false,
+      "params": ["RENFE_STATION"],
+      "features": [
+        {
+          "external_id": "ext:renfe:station:17000:next",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:17000:wait",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 180,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:17000:following",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 180,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:17000:delay",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 300,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "product": {
+      "external_id": "ext:renfe:station:60000_ld-ave",
+      "should_poll": false,
+      "params": ["RENFE_STATION", "RENFE_LINE"],
+      "features": [
+        {
+          "external_id": "ext:renfe:station:60000_ld-ave:next",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:60000_ld-ave:wait",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 180,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:60000_ld-ave:following",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 180,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:station:60000_ld-ave:delay",
+          "category": "duration",
+          "type": "integer",
+          "unit": "minutes",
+          "min": 0,
+          "max": 300,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "cercaniasLine": {
+      "external_id": "ext:renfe:line:10-c3",
+      "should_poll": false,
+      "params": ["RENFE_LINE"],
+      "features": [
+        {
+          "external_id": "ext:renfe:line:10-c3:status",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:line:10-c3:messages",
+          "category": "counter-sensor",
+          "type": "integer",
+          "min": 0,
+          "max": 20,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    },
+    "productLine": {
+      "external_id": "ext:renfe:line:ld-ave",
+      "should_poll": false,
+      "params": ["RENFE_LINE"],
+      "features": [
+        {
+          "external_id": "ext:renfe:line:ld-ave:status",
+          "category": "text",
+          "type": "text",
+          "min": 0,
+          "max": 0,
+          "read_only": true,
+          "has_feedback": false
+        },
+        {
+          "external_id": "ext:renfe:line:ld-ave:messages",
+          "category": "counter-sensor",
+          "type": "integer",
+          "min": 0,
+          "max": 20,
+          "read_only": true,
+          "has_feedback": false
+        }
+      ]
+    }
+  },
+  "manifest": {
+    "actions": [
+      "test_connection",
+      "search_station",
+      "add_station",
+      "remove_station",
+      "list_stations",
+      "diagnostic"
+    ],
+    "config_schema": [
+      {
+        "key": "intro",
+        "type": "section"
+      },
+      {
+        "key": "station_1_section",
+        "type": "section"
+      },
+      {
+        "key": "station_1",
+        "type": "string"
+      },
+      {
+        "key": "station_1_destination",
+        "type": "string"
+      },
+      {
+        "key": "station_1_line",
+        "type": "string"
+      },
+      {
+        "key": "station_2_section",
+        "type": "section"
+      },
+      {
+        "key": "station_2",
+        "type": "string"
+      },
+      {
+        "key": "station_2_destination",
+        "type": "string"
+      },
+      {
+        "key": "station_2_line",
+        "type": "string"
+      },
+      {
+        "key": "station_3_section",
+        "type": "section"
+      },
+      {
+        "key": "station_3",
+        "type": "string"
+      },
+      {
+        "key": "station_3_destination",
+        "type": "string"
+      },
+      {
+        "key": "station_3_line",
+        "type": "string"
+      },
+      {
+        "key": "lines_section",
+        "type": "section"
+      },
+      {
+        "key": "lines",
+        "type": "string"
+      },
+      {
+        "key": "options_section",
+        "type": "section"
+      },
+      {
+        "key": "interval",
+        "type": "select"
+      },
+      {
+        "key": "language",
+        "type": "select"
+      }
+    ],
+    "scene_triggers": [
+      {
+        "key": "departure_soon",
+        "fields": [
+          {
+            "key": "station",
+            "options": []
+          },
+          {
+            "key": "minutes",
+            "options": ["2", "3", "5", "10", "15", "20", "30"]
+          }
+        ],
+        "variables": [
+          {
+            "key": "station_name",
+            "type": "string"
+          },
+          {
+            "key": "line",
+            "type": "string"
+          },
+          {
+            "key": "train_number",
+            "type": "string"
+          },
+          {
+            "key": "destination",
+            "type": "string"
+          },
+          {
+            "key": "time",
+            "type": "string"
+          },
+          {
+            "key": "track",
+            "type": "string"
+          },
+          {
+            "key": "delay_minutes",
+            "type": "number"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "departure_delayed",
+        "fields": [
+          {
+            "key": "station",
+            "options": []
+          },
+          {
+            "key": "minutes",
+            "options": ["5", "10", "15", "30", "60"]
+          }
+        ],
+        "variables": [
+          {
+            "key": "station_name",
+            "type": "string"
+          },
+          {
+            "key": "line",
+            "type": "string"
+          },
+          {
+            "key": "train_number",
+            "type": "string"
+          },
+          {
+            "key": "destination",
+            "type": "string"
+          },
+          {
+            "key": "time",
+            "type": "string"
+          },
+          {
+            "key": "expected_time",
+            "type": "string"
+          },
+          {
+            "key": "delay_minutes",
+            "type": "number"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "departure_cancelled",
+        "fields": [
+          {
+            "key": "station",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "station_name",
+            "type": "string"
+          },
+          {
+            "key": "line",
+            "type": "string"
+          },
+          {
+            "key": "train_number",
+            "type": "string"
+          },
+          {
+            "key": "destination",
+            "type": "string"
+          },
+          {
+            "key": "time",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "line_disrupted",
+        "fields": [
+          {
+            "key": "line",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "line_name",
+            "type": "string"
+          },
+          {
+            "key": "state",
+            "type": "string"
+          },
+          {
+            "key": "title",
+            "type": "string"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          },
+          {
+            "key": "start",
+            "type": "string"
+          },
+          {
+            "key": "end",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "line_restored",
+        "fields": [
+          {
+            "key": "line",
+            "options": []
+          }
+        ],
+        "variables": [
+          {
+            "key": "line_name",
+            "type": "string"
+          },
+          {
+            "key": "state",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "traffic_message",
+        "fields": [
+          {
+            "key": "line",
+            "options": []
+          },
+          {
+            "key": "kind",
+            "options": ["info", "disrupted", "major"]
+          }
+        ],
+        "variables": [
+          {
+            "key": "line_name",
+            "type": "string"
+          },
+          {
+            "key": "kind",
+            "type": "string"
+          },
+          {
+            "key": "title",
+            "type": "string"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          },
+          {
+            "key": "start",
+            "type": "string"
+          },
+          {
+            "key": "end",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "scene_actions": [
+      {
+        "key": "get_next_departures",
+        "fields": ["station"],
+        "outputs": [
+          {
+            "key": "station_name",
+            "type": "string"
+          },
+          {
+            "key": "found",
+            "type": "boolean"
+          },
+          {
+            "key": "line",
+            "type": "string"
+          },
+          {
+            "key": "train_number",
+            "type": "string"
+          },
+          {
+            "key": "destination",
+            "type": "string"
+          },
+          {
+            "key": "minutes",
+            "type": "number"
+          },
+          {
+            "key": "time",
+            "type": "string"
+          },
+          {
+            "key": "arrival_time",
+            "type": "string"
+          },
+          {
+            "key": "track",
+            "type": "string"
+          },
+          {
+            "key": "realtime",
+            "type": "boolean"
+          },
+          {
+            "key": "delay_minutes",
+            "type": "number"
+          },
+          {
+            "key": "following_minutes",
+            "type": "number"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "key": "get_line_traffic",
+        "fields": ["line"],
+        "outputs": [
+          {
+            "key": "line_name",
+            "type": "string"
+          },
+          {
+            "key": "state",
+            "type": "string"
+          },
+          {
+            "key": "state_label",
+            "type": "string"
+          },
+          {
+            "key": "disrupted",
+            "type": "boolean"
+          },
+          {
+            "key": "message_count",
+            "type": "number"
+          },
+          {
+            "key": "title",
+            "type": "string"
+          },
+          {
+            "key": "message",
+            "type": "string"
+          },
+          {
+            "key": "summary",
+            "type": "string"
+          }
+        ]
+      }
+    ],
+    "widgets": [
+      {
+        "key": "departures",
+        "settings": ["station", "stations", "station_name", "line", "count"],
+        "options": {}
+      },
+      {
+        "key": "traffic",
+        "settings": ["lines"],
+        "options": {}
+      }
+    ]
+  }
+}
